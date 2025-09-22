@@ -81,6 +81,22 @@
     .logo-row{display:grid;grid-template-columns:repeat(6,1fr);gap:.8rem;align-items:center}
     .logo-item{background:#fff;border:1px solid var(--line);border-radius:12px;min-height:72px;display:grid;place-items:center;font-weight:700;color:#374257}
 
+    .logo-item img{
+      max-width: 120px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      filter: grayscale(100%);
+      opacity: .9;
+      transition: filter .2s ease, opacity .2s ease, transform .2s ease;
+    }
+    .logo-item:hover img{
+      filter: none;
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
     .cta{background:linear-gradient(135deg,var(--navy),#0b1b34);color:#fff}
     .cta-inner{padding:3.8rem 0;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 
@@ -96,7 +112,14 @@
     .social a{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;background:#121b2c;color:#dfe7f2;margin-left:.3rem}
 
     @media (max-width:1024px){.grid-3{grid-template-columns:1fr 1fr} .product-grid{grid-template-columns:repeat(2,1fr)} .split-inner{grid-template-columns:1fr} .contact-grid{grid-template-columns:1fr}}
-    @media (max-width:720px){.nav{display:none;position:absolute;inset:60px 0 auto 0;background:#0c1422;padding:1rem;flex-direction:column} .nav a{padding:.5rem 0} .nav-toggle{display:block} .hero{min-height:72dvh} .logo-row{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:720px){
+      .nav{display:none;position:absolute;inset:60px 0 auto 0;background:#0c1422;padding:1rem;flex-direction:column}
+      .nav a{padding:.5rem 0}
+      .nav-toggle{display:block}
+      .hero{min-height:72dvh}
+      .logo-row{grid-template-columns:repeat(3,1fr)}
+      .logo-item img{max-width: 90px}
+    }
   </style>
 </head>
 <body>
@@ -216,12 +239,13 @@
     <div class="container">
       <h2>Trusted by field leaders</h2>
       <div class="logo-row">
-        <div class="logo-item">Extraction</div>
-        <div class="logo-item">3Bear</div>
-        <div class="logo-item">Elevation</div>
-        <div class="logo-item">Petrotech</div>
-        <div class="logo-item">XTR</div>
-        <div class="logo-item">DroneWorx</div>
+        <div class="logo-item"><img src="images/extraction.jpeg" alt="Extraction" loading="lazy"></div>
+        <div class="logo-item"><img src="images/3bear.jpg" alt="3Bear" loading="lazy"></div>
+        <div class="logo-item"><img src="images/elevation.png" alt="Elevation" loading="lazy"></div>
+        <div class="logo-item"><img src="images/petrotech.png" alt="Petrotech" loading="lazy"></div>
+        <div class="logo-item"><img src="images/xtr.avif" alt="XTR" loading="lazy"></div>
+        <div class="logo-item"><img src="images/droneworx.avif" alt="DroneWorx" loading="lazy"></div>
+        <div class="logo-item"><img src="images/dcp.webp" alt="DCP" loading="lazy"></div>
       </div>
     </div>
   </section>
