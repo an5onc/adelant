@@ -7,122 +7,218 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-  <!-- If you prefer a separate file: create index.css and move the CSS from the <style> block below into it, then add: <link rel="stylesheet" href="index.css"> -->
   <style>
-    :root{
-      --charcoal:#1e1f23; --steel:#2b2f36; --navy:#0e2238; --ink:#0b1320;
-      --text:#e9edf2; --muted:#b6c0cf; --light:#f4f6f8; --line:#e3e7ee;
-      --accent:#FFC107; /* safety yellow */
-      --accent-2:#FF6D00; /* hi-vis orange */
-      --accent-ink:#1a1400; --radius:14px; --shadow:0 10px 30px rgba(0,0,0,.25)
-    }
-    *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;color:#1a1f2b;background:#fff}
-    .container{width:min(1120px,92%);margin-inline:auto}
-    h1,h2,h3{font-family:Montserrat,Inter,system-ui,sans-serif;margin:0 0 .5rem}
-    h1{font-size:clamp(2rem,3.5vw,3.25rem);line-height:1.05}
-    h2{font-size:clamp(1.5rem,2.3vw,2.25rem)} h3{font-size:1.125rem}
-    p{margin:.25rem 0 1rem;color:#334} small{color:#556}
-    a{color:var(--navy);text-decoration:none} .link{font-weight:600}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:.8rem 1.1rem;border-radius:12px;border:2px solid transparent;font-weight:700;transition:.2s;cursor:pointer}
-    .btn-primary{background:var(--accent);color:var(--accent-ink)} .btn-primary:hover{filter:brightness(.92)}
-    .btn-ghost{border-color:#ccd3e0;color:#0b1b34} .btn-lg{padding:1rem 1.25rem;font-size:1.05rem}
+  /* ==== Palette aligned to AdelantEnergy.com (white base + green accents) ==== */
+  :root{
+    /* Core */
+    --bg:#ffffff;              /* page background */
+    --ink:#0b1b34;             /* primary text on light */
+    --muted:#4b5871;           /* secondary text */
+    --line:#e3e7ee;            /* hairline borders */
 
-    .site-header{position:sticky;top:0;z-index:50;background:rgba(12,18,30,.72);-webkit-backdrop-filter:saturate(140%) blur(8px);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:.65rem 0}
-    .brand{display:flex;align-items:center;gap:.6rem;color:#fff}
-    .brand-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#111;font-weight:800}
-    .brand-text{font-weight:800;letter-spacing:.2px}
-    .nav{display:flex;gap:1.2rem;align-items:center}
-    .nav a{color:#dfe7f2;opacity:.9} .nav a:hover{opacity:1} .nav .btn-primary{color:var(--accent-ink)}
-    .nav-toggle{width:36px;height:36px;border:0;border-radius:8px;background:transparent;display:none;position:relative}
-    .nav-toggle::before,.nav-toggle::after{content:"";position:absolute;left:8px;right:8px;height:2px;background:#fff;transition:.2s}
-    .nav-toggle::before{top:12px} .nav-toggle::after{top:22px}
-    .nav.open{display:flex}
-    .nav-toggle.open::before{transform:translateY(5px) rotate(45deg)} .nav-toggle.open::after{transform:translateY(-5px) rotate(-45deg)}
+    /* Greens (primary brand accent) */
+    --accent:#1f7a3a;          /* primary green */
+    --accent-2:#16612d;        /* darker hover green */
+    --accent-3:#e7f4ec;        /* pale green wash */
 
-    .hero{position:relative;min-height:78dvh;display:grid;align-items:center;color:#fff;background:radial-gradient(1200px 600px at 20% 0%,rgba(255,193,7,.15),transparent),linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.6));overflow:hidden}
-    .hero-media{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1542601098-8fc114e148e8?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;filter:saturate(90%) contrast(96%)}
-    .hero-video{display:none}
-    .hero-content{position:relative;padding:7dvh 0 10dvh}
-    .hero-content p{max-width:60ch;color:#dbe6f7}
-    .hero-ctas{display:flex;gap:.7rem;margin-top:1rem}
-    .hero-metrics{display:flex;gap:1.5rem;margin-top:1.2rem;flex-wrap:wrap}
-    .metric{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:.7rem .9rem;border-radius:12px}
-    .metric span{display:block;font-weight:800}
+    /* Blues for headers/stripes that appear on the original site */
+    --navy:#0c1422;
+    --navy-soft:#121b2c;
 
-    .split{background:linear-gradient(180deg,#fff,#f7f9fc)}
-    .split-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;padding:5rem 0}
-    .split-media{min-height:360px;border-radius:18px;box-shadow:var(--shadow);background:radial-gradient(800px 260px at 20% 0%,rgba(255,193,7,.15),transparent),url('https://images.unsplash.com/photo-1581091014607-8779878a78b1?q=80&w=1400&auto=format&fit=crop') center/cover no-repeat}
-    .checklist{padding:0;margin:1rem 0;list-style:none}
-    .checklist li{padding-left:1.8rem;position:relative;margin:.55rem 0}
-    .checklist li::before{content:"";position:absolute;left:0;top:.55rem;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
-    .quote{margin-top:1rem;padding:1rem;border-left:4px solid var(--accent);background:#fff;border-radius:10px}
+    --radius:14px;
+    --shadow:0 10px 24px rgba(16,27,43,.08);
+  }
 
-    .features{background:#0c1422;color:#e9eef8;padding:5rem 0}
-    .features h2{color:#fff;text-align:center;margin-bottom:2rem}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
-    .card{background:linear-gradient(180deg,#101a2b,#0b1320);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:1.1rem;box-shadow:var(--shadow);transform:translateY(12px);opacity:0;transition:transform .5s ease, opacity .5s ease}
-    .card .icon{font-size:1.5rem;margin-bottom:.5rem}
-    .reveal-in{transform:none;opacity:1}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+  }
+  img{max-width:100%;height:auto;display:block}
+  h1,h2,h3{font-family:Montserrat,Inter,sans-serif;margin:0 0 .5rem}
+  h1{font-size:clamp(2rem,3.5vw,3.1rem);line-height:1.06}
+  h2{font-size:clamp(1.6rem,2.4vw,2.2rem)}
+  h3{font-size:1.1rem}
+  p{margin:.25rem 0 1rem}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{color:var(--accent-2)}
+  .container{width:min(1100px,92%);margin-inline:auto}
 
-    .products{background:#fff;padding:5rem 0}
-    .section-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem}
-    .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-    .product-card{border:1px solid var(--line);border-radius:16px;padding:.9rem;background:#fff;box-shadow:0 6px 18px rgba(16,27,43,.06);transform:translateY(12px);opacity:0;transition:transform .5s ease,opacity .5s ease}
-    .product-img{height:160px;border-radius:12px;background:#eef2f7}
-    .product-a{background:linear-gradient(135deg,#e9f2ff,#fff)} .product-b{background:linear-gradient(135deg,#fff0e3,#fff)}
-    .product-c{background:linear-gradient(135deg,#eafcef,#fff)} .product-d{background:linear-gradient(135deg,#eee7ff,#fff)}
-    .product-card h3{margin:.75rem 0 .25rem}
-    .product-card .link{color:#0b1b34}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:.85rem 1.15rem;border-radius:12px;border:2px solid transparent;
+    font-weight:700;cursor:pointer;transition:.18s;
+  }
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-2)}
+  .btn-ghost{border-color:var(--line);color:var(--ink);background:#fff}
+  .btn-ghost:hover{background:#f8fafc}
+  .btn-lg{padding:1rem 1.25rem;font-size:1.05rem}
 
-    .logos{background:#f6f8fb;padding:4rem 0}
-    .logos h2{text-align:center;margin-bottom:1.2rem}
-    .logo-row{display:grid;grid-template-columns:repeat(6,1fr);gap:.8rem;align-items:center}
-    .logo-item{background:#fff;border:1px solid var(--line);border-radius:12px;min-height:72px;display:grid;place-items:center;font-weight:700;color:#374257}
+  /* ==== Header (simple, light) ==== */
+  .site-header{
+    position:sticky;top:0;z-index:40;
+    background:#ffffffcc;
+    -webkit-backdrop-filter:saturate(130%) blur(6px);
+    backdrop-filter:saturate(130%) blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{display:flex;align-items:center;justify-content:space-between;padding:.65rem 0}
+  .brand{display:flex;align-items:center;gap:.6rem;color:var(--ink)}
+  .brand-mark{
+    display:grid;place-items:center;width:36px;height:36px;border-radius:10px;
+    background:linear-gradient(135deg,#e9f5ee,#ffffff);color:var(--accent);border:2px solid var(--accent);font-weight:800
+  }
+  .brand-text{font-weight:800;letter-spacing:.2px}
+  .nav{display:flex;gap:1.1rem;align-items:center}
+  .nav a{color:#374257}
+  .nav a:hover{color:var(--accent)}
+  .nav .btn-primary{color:#fff}
+  .nav-toggle{
+    width:36px;height:36px;border:0;border-radius:8px;background:transparent;
+    display:none;position:relative
+  }
+  .nav-toggle::before,.nav-toggle::after{
+    content:"";position:absolute;left:8px;right:8px;height:2px;background:#2a3346;transition:.2s
+  }
+  .nav-toggle::before{top:12px}
+  .nav-toggle::after{top:22px}
+  .nav.open{display:flex}
+  .nav-toggle.open::before{transform:translateY(5px) rotate(45deg)}
+  .nav-toggle.open::after{transform:translateY(-5px) rotate(-45deg)}
 
-    .logo-item img{
-      max-width: 120px;
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      display: block;
-      filter: grayscale(100%);
-      opacity: .9;
-      transition: filter .2s ease, opacity .2s ease, transform .2s ease;
-    }
-    .logo-item:hover img{
-      filter: none;
-      opacity: 1;
-      transform: translateY(-2px);
-    }
+  /* ==== Hero (light, with soft green wash) ==== */
+  .hero{
+    position:relative;min-height:64dvh;display:grid;align-items:center;
+    background:
+      radial-gradient(900px 360px at 10% 0%,var(--accent-3),transparent),
+      #fff;
+    border-bottom:1px solid var(--line);
+    overflow:hidden
+  }
+  .hero-media{display:none} /* original site uses static hero; no heavy video */
+  .hero-content{position:relative;padding:6dvh 0 8dvh}
+  .hero-kicker{color:var(--accent);font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .hero-content p{max-width:62ch;color:#415063}
+  .hero-ctas{display:flex;gap:.7rem;margin-top:1rem;flex-wrap:wrap}
+  .hero-metrics{display:flex;gap:1rem;margin-top:1.2rem;flex-wrap:wrap}
+  .metric{background:#fff;border:1px solid var(--line);padding:.7rem .9rem;border-radius:12px;box-shadow:var(--shadow)}
+  .metric span{display:block;font-weight:800;color:var(--accent)}
 
-    .cta{background:linear-gradient(135deg,var(--navy),#0b1b34);color:#fff}
-    .cta-inner{padding:3.8rem 0;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  /* ==== Mission (simple stacked blocks like the live site) ==== */
+  .split{background:#fff}
+  .split-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;padding:4rem 0}
+  .checklist{padding:0;margin:1rem 0;list-style:none}
+  .checklist li{padding-left:1.6rem;position:relative;margin:.55rem 0}
+  .checklist li::before{
+    content:"";position:absolute;left:0;top:.55rem;width:10px;height:10px;border-radius:50%;
+    background:var(--accent)
+  }
+  .split-media{
+    min-height:320px;border-radius:16px;box-shadow:var(--shadow);
+    background:
+      linear-gradient(0deg,rgba(31,122,58,.08),rgba(31,122,58,.08)),
+      url('https://images.unsplash.com/photo-1581091014607-8779878a78b1?q=80&w=1400&auto=format&fit=crop') center/cover no-repeat
+  }
+  .quote{
+    margin-top:1rem;padding:1rem;border-left:4px solid var(--accent);
+    background:#fff;border-radius:10px;color:#2a3346
+  }
 
-    .contact{background:#fff;padding:5rem 0}
-    .contact-grid{display:grid;grid-template-columns:1fr .9fr;gap:1rem}
-    .contact-form{border:1px solid var(--line);border-radius:16px;padding:1rem;background:#fff;box-shadow:0 6px 18px rgba(16,27,43,.06)}
-    label{display:block;font-weight:600;margin:.6rem 0 .25rem}
-    input,textarea{width:100%;padding:.8rem;border-radius:10px;border:1px solid #cfd7e6;background:#fafcff;font:inherit}
-    button{font:inherit}
+  /* ==== Technology strip (subtle navy band like site sections) ==== */
+  .features{background:#f7f9fc;color:#2a3346;padding:4.4rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .features h2{text-align:center;margin-bottom:1.8rem;color:#142033}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.1rem;
+    box-shadow:var(--shadow);transform:translateY(10px);opacity:0;
+    transition:transform .45s ease, opacity .45s ease
+  }
+  .card .icon{font-size:1.4rem;margin-bottom:.45rem;color:var(--accent)}
+  .reveal-in{transform:none;opacity:1}
 
-    .site-footer{background:#0b1320;color:#b9c5db}
-    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.2rem 0}
-    .social a{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;background:#121b2c;color:#dfe7f2;margin-left:.3rem}
+  /* ==== Products (white cards) ==== */
+  .products{background:#fff;padding:4.6rem 0}
+  .section-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;flex-wrap:wrap;margin-bottom:1.1rem}
+  .section-head p{color:#4b5871}
+  .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+  .product-card{
+    border:1px solid var(--line);border-radius:16px;padding:.9rem;background:#fff;
+    box-shadow:var(--shadow);transform:translateY(10px);opacity:0;
+    transition:transform .45s ease,opacity .45s ease
+  }
+  .product-img{height:160px;border-radius:12px;background:#f2f5f9}
+  .product-a{background:linear-gradient(135deg,#e9f5ee,#fff)}
+  .product-b{background:linear-gradient(135deg,#fff7ec,#fff)}
+  .product-c{background:linear-gradient(135deg,#eef8ff,#fff)}
+  .product-d{background:linear-gradient(135deg,#f3edff,#fff)}
+  .product-card h3{margin:.75rem 0 .25rem}
+  .product-card .link{color:var(--accent-2)}
 
-    @media (max-width:1024px){.grid-3{grid-template-columns:1fr 1fr} .product-grid{grid-template-columns:repeat(2,1fr)} .split-inner{grid-template-columns:1fr} .contact-grid{grid-template-columns:1fr}}
-    @media (max-width:720px){
-      .nav{display:none;position:absolute;inset:60px 0 auto 0;background:#0c1422;padding:1rem;flex-direction:column}
-      .nav a{padding:.5rem 0}
-      .nav-toggle{display:block}
-      .hero{min-height:72dvh}
-      .logo-row{grid-template-columns:repeat(3,1fr)}
-      .logo-item img{max-width: 90px}
-    }
+  /* ==== Logos (simple light band) ==== */
+  .logos{background:#f6f8fb;padding:4rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .logos h2{text-align:center;margin-bottom:1.1rem}
+  .logo-row{display:grid;grid-template-columns:repeat(6,1fr);gap:.8rem;align-items:center}
+  .logo-item{
+    background:#fff;border:1px solid var(--line);border-radius:12px;
+    min-height:72px;display:grid;place-items:center
+  }
+  .logo-item img{
+    max-width: 120px;width: 100%;height: auto;object-fit:contain;display:block;
+    filter: grayscale(100%); opacity:.9; transition: filter .2s ease, opacity .2s ease, transform .2s ease;
+  }
+  .logo-item:hover img{filter:none;opacity:1;transform:translateY(-2px)}
+
+  /* ==== CTA (green band) ==== */
+  .cta{background:linear-gradient(0deg,rgba(31,122,58,.10),rgba(31,122,58,.10)),#fff}
+  .cta-inner{padding:3.4rem 0;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .cta h2{color:#0f2533}
+
+  /* ==== Contact ==== */
+  .contact{background:#fff;padding:4.8rem 0}
+  .contact h2{color:#142033}
+  .contact-grid{display:grid;grid-template-columns:1fr .9fr;gap:1rem}
+  .contact-form{
+    border:1px solid var(--line);border-radius:16px;padding:1rem;background:#fff;
+    box-shadow:var(--shadow);color:#2a3346
+  }
+  label{display:block;font-weight:600;margin:.6rem 0 .25rem}
+  input,textarea{
+    width:100%;padding:.85rem;border-radius:10px;border:1px solid #cfd7e6;background:#fafcff;color:#142033;font:inherit
+  }
+  input::placeholder,textarea::placeholder{color:#90a0bb}
+  button{font:inherit}
+
+  /* ==== Footer (dark navy like their footer bar) ==== */
+  .site-footer{background:var(--navy-soft);color:#cbd6e8}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.1rem 0}
+  .social a{
+    display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;
+    background:#0e1726;border:1px solid rgba(255,255,255,.08);color:#dfe7f2;margin-left:.3rem
+  }
+
+  /* ==== Responsive ==== */
+  @media (max-width:1024px){
+    .grid-3{grid-template-columns:1fr 1fr}
+    .product-grid{grid-template-columns:repeat(2,1fr)}
+    .split-inner{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:720px){
+    .nav{display:none;position:absolute;inset:60px 0 auto 0;background:#fff;padding:1rem;flex-direction:column;border-bottom:1px solid var(--line)}
+    .nav a{padding:.5rem 0}
+    .nav-toggle{display:block}
+    .hero{min-height:58dvh}
+    .logo-row{grid-template-columns:repeat(3,1fr)}
+    .logo-item img{max-width: 90px}
+  }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#">
@@ -140,13 +236,12 @@
     </div>
   </header>
 
+  <!-- Hero -->
   <section class="hero" id="home" aria-label="Pipeline Silencer">
-    <div class="hero-media" role="img" aria-label="Industrial site at dusk with pipeline">
-      <video class="hero-video" autoplay muted loop playsinline aria-hidden="true"></video>
-    </div>
     <div class="container hero-content">
+      <div class="hero-kicker">Pipeline Silencer</div>
       <h1>Reduce Noise. Elevate Safety. Ensure Compliance.</h1>
-      <p>Patented Pipeline Silencer technology that protects operators, communities, and the environment.</p>
+      <p>Patented technology that protects operators, communities, and the environment.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#contact">Request a Quote</a>
         <a class="btn btn-ghost" href="#technology">See How It Works</a>
@@ -154,11 +249,12 @@
       <div class="hero-metrics">
         <div class="metric"><span>OSHA</span><small>Hierarchy of controls</small></div>
         <div class="metric"><span>Noise ↓</span><small>Engineered attenuation</small></div>
-        <div class="metric"><span>Field‑proven</span><small>Across multiple sites</small></div>
+        <div class="metric"><span>Field-proven</span><small>Across multiple sites</small></div>
       </div>
     </div>
   </section>
 
+  <!-- Mission -->
   <section class="split" id="mission">
     <div class="container split-inner">
       <div class="split-copy">
@@ -177,6 +273,7 @@
     </div>
   </section>
 
+  <!-- Technology -->
   <section class="features" id="technology">
     <div class="container">
       <h2>Engineered for safety, compliance, and performance</h2>
@@ -193,13 +290,14 @@
         </article>
         <article class="card">
           <div class="icon" aria-hidden="true">✅</div>
-          <h3>OSHA‑aligned</h3>
+          <h3>OSHA-aligned</h3>
           <p>Supports OSHA hierarchy of controls; simplifies compliance with local noise limits.</p>
         </article>
       </div>
     </div>
   </section>
 
+  <!-- Products -->
   <section class="products" id="products">
     <div class="container">
       <div class="section-head">
@@ -222,7 +320,7 @@
         <article class="product-card">
           <div class="product-img product-c" role="img" aria-label="Flanged silencer"></div>
           <h3>Flanged Silencer</h3>
-          <p>High‑throughput assemblies for fixed installations and severe duty.</p>
+          <p>High-throughput assemblies for fixed installations and severe duty.</p>
           <a href="#contact" class="link">Request specs →</a>
         </article>
         <article class="product-card">
@@ -235,6 +333,7 @@
     </div>
   </section>
 
+  <!-- Logos -->
   <section class="logos" id="clients" aria-label="Companies using the silencer">
     <div class="container">
       <h2>Trusted by field leaders</h2>
@@ -250,6 +349,7 @@
     </div>
   </section>
 
+  <!-- CTA -->
   <section class="cta">
     <div class="container cta-inner">
       <h2>Ready to reduce noise and risk at your sites?</h2>
@@ -257,6 +357,7 @@
     </div>
   </section>
 
+  <!-- Contact -->
   <section class="contact" id="contact">
     <div class="container">
       <h2>Contact us</h2>
@@ -272,12 +373,13 @@
           <p><strong>Regions:</strong> Colorado, Wyoming, Texas</p>
           <p><strong>Email:</strong> kblake@adelantenergy.com</p>
           <p><strong>Phone:</strong> 970-646-1248</p>
-          <p class="small">* Replace metrics and client names with verified data.</p>
+          <p class="small">* Replace metrics and client names with verified data from the live site.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <p>© <span id="y"></span> Adelant Energy LLC</p>
