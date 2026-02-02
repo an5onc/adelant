@@ -3,6 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Adelant Energy manufactures patented Pipeline Silencers that reduce hazardous noise, protect operators, and help energy companies meet OSHA and local noise compliance." />
+  <meta name="theme-color" content="#1f7a3a" />
+  <meta property="og:title" content="Adelant Energy — Pipeline Silencer" />
+  <meta property="og:description" content="Patented technology that protects operators, communities, and the environment through engineered noise attenuation." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://adelantenergy.com" />
   <title>Adelant Energy — Pipeline Silencer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -225,14 +231,14 @@
         <span class="brand-mark" aria-hidden="true">AE</span>
         <span class="brand-text">Adelant Energy</span>
       </a>
-      <nav class="nav">
+      <nav class="nav" id="main-nav" role="navigation" aria-label="Main">
         <a href="#mission">Mission</a>
         <a href="#technology">Technology</a>
         <a href="#products">Products</a>
         <a href="#clients">Clients</a>
         <a class="btn btn-primary" href="#contact">Request a Quote</a>
       </nav>
-      <button class="nav-toggle" aria-label="Open menu"></button>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"></button>
     </div>
   </header>
 
@@ -363,10 +369,10 @@
       <h2>Contact us</h2>
       <div class="contact-grid">
         <form class="contact-form" action="#" method="post">
-          <label>Full name<input type="text" name="name" required></label>
-          <label>Email<input type="email" name="email" required></label>
-          <label>Company<input type="text" name="company"></label>
-          <label>Message<textarea name="message" rows="5" required></textarea></label>
+          <label for="cf-name">Full name</label><input id="cf-name" type="text" name="name" placeholder="Jane Doe" required autocomplete="name">
+          <label for="cf-email">Email</label><input id="cf-email" type="email" name="email" placeholder="jane@example.com" required autocomplete="email">
+          <label for="cf-company">Company</label><input id="cf-company" type="text" name="company" placeholder="Your company" autocomplete="organization">
+          <label for="cf-message">Message</label><textarea id="cf-message" name="message" rows="5" placeholder="Tell us about your project…" required></textarea>
           <button class="btn btn-primary" type="submit">Send</button>
         </form>
         <div class="contact-info">
@@ -394,7 +400,7 @@
   <script>
     const toggle=document.querySelector('.nav-toggle');
     const nav=document.querySelector('.nav');
-    toggle.addEventListener('click',()=>{nav.classList.toggle('open');toggle.classList.toggle('open')});
+    toggle.addEventListener('click',()=>{nav.classList.toggle('open');toggle.classList.toggle('open');toggle.setAttribute('aria-expanded',nav.classList.contains('open'))});
     document.getElementById('y').textContent=new Date().getFullYear();
     const reveal=new IntersectionObserver((entries)=>{entries.forEach(e=>e.isIntersecting&&e.target.classList.add('reveal-in'))},{threshold:.12});
     document.querySelectorAll('.card,.product-card,.split,.features,.products,.logos,.cta,.contact').forEach(el=>reveal.observe(el));
